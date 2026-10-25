@@ -1,0 +1,113 @@
+.quests {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+}
+
+.quests__rail {
+  position: relative;
+  background: var(--tex-rail) repeat-y center top / 48px;
+  image-rendering: pixelated;
+}
+
+.quests__cart {
+  position: absolute;
+  left: 8px;
+  transition: top 0.12s linear;
+}
+
+.quests__list {
+  display: grid;
+  gap: 24px;
+}
+
+.quest__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.quest__slot {
+  flex-shrink: 0;
+}
+
+.quest__titles {
+  flex: 1;
+}
+
+.quest__role {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #2a2a2a;
+}
+
+.quest__company {
+  color: #00807f;
+  font-size: 17px;
+}
+
+.quest__when {
+  text-align: right;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.quest__done {
+  color: #007a00;
+}
+
+.quest__loc {
+  color: #6a6a6a;
+}
+
+.quest__points {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+  font-size: 17px;
+  color: #2f2f2f;
+}
+
+.quest__points li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.quest__points li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  background: #3f3f3f;
+}
+
+.quest__reward {
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #6a6a6a;
+}
+
+@media (max-width: 720px) {
+  .quests {
+    grid-template-columns: 1fr;
+  }
+
+  .quests__rail {
+    display: none;
+  }
+
+  .quest__head {
+    flex-wrap: wrap;
+  }
+
+  .quest__when {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-align: left;
+  }
+}

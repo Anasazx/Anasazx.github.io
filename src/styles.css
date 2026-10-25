@@ -1,1 +1,334 @@
-/* You can add global styles to this file, and also import other style files */
+/* ---------- Tokens ---------- */
+
+:root {
+  --bs: 64px; /* one block, on screen */
+  --font: 'Pixelify Sans', 'Courier New', monospace;
+  --gui: #c6c6c6;
+  --gui-text: #3f3f3f;
+  --c-yellow: #ffff55;
+  --c-gold: #ffaa00;
+  --c-green: #55ff55;
+  --c-dgreen: #00aa00;
+  --c-aqua: #55ffff;
+  --c-daqua: #00aaaa;
+  --c-purple: #ff55ff;
+  --c-gray: #aaaaaa;
+  --c-dgray: #555555;
+  color-scheme: dark;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --bs: 48px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: #1a120b;
+  color: #fff;
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  /* Pixelify's "fi" ligature reads as a capital A — turn ligatures off everywhere. */
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'clig' 0;
+}
+
+button,
+input {
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'clig' 0;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: #3d4fd1;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Text shadow in the game's style: same glyph, offset, at a quarter brightness. */
+.sh {
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+.c-yellow { color: var(--c-yellow); }
+.c-gold { color: var(--c-gold); }
+.c-green { color: var(--c-green); }
+.c-dgreen { color: var(--c-dgreen); }
+.c-aqua { color: var(--c-aqua); }
+.c-daqua { color: var(--c-daqua); }
+.c-purple { color: var(--c-purple); }
+.c-gray { color: var(--c-gray); }
+
+/* ---------- Buttons ---------- */
+
+.mc-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 18px;
+  font: inherit;
+  font-size: 18px;
+  color: #e0e0e0;
+  text-decoration: none;
+  text-shadow: 2px 2px 0 #383838;
+  background: #6f6f6f var(--tex-button);
+  background-size: var(--bs);
+  image-rendering: pixelated;
+  border: 2px solid #000;
+  box-shadow:
+    inset 2px 2px 0 #a9a9a9,
+    inset -2px -4px 0 #454545;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mc-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(110, 130, 255, 0.28);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mc-btn:hover,
+.mc-btn:focus-visible {
+  color: #ffffa0;
+  border-color: #fff;
+  outline: none;
+}
+
+.mc-btn:hover::after,
+.mc-btn:focus-visible::after {
+  opacity: 1;
+}
+
+.mc-btn:active {
+  box-shadow:
+    inset 2px 2px 0 #454545,
+    inset -2px -2px 0 #8a8a8a;
+}
+
+.mc-btn--wide {
+  width: 100%;
+}
+
+.mc-btn--sm {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+
+.mc-btn:disabled {
+  color: #a0a0a0;
+  background: #2c2c2c;
+  border-color: #000;
+  box-shadow: none;
+  cursor: default;
+}
+
+.mc-btn:disabled::after {
+  opacity: 0;
+}
+
+/* ---------- Panels ---------- */
+
+/* Light GUI panel with bevelled edges and notched corners. */
+.mc-panel {
+  background: var(--gui);
+  color: var(--gui-text);
+  border: 3px solid #000;
+  box-shadow:
+    inset 3px 3px 0 #fff,
+    inset -3px -3px 0 #555;
+  clip-path: polygon(
+    3px 0,
+    calc(100% - 3px) 0,
+    100% 3px,
+    100% calc(100% - 3px),
+    calc(100% - 3px) 100%,
+    3px 100%,
+    0 calc(100% - 3px),
+    0 3px
+  );
+  padding: 22px;
+}
+
+.mc-panel__title {
+  margin-bottom: 14px;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--gui-text);
+}
+
+/* Dark translucent panel, like toasts and the chat. */
+.mc-dark {
+  background: rgba(20, 20, 20, 0.88);
+  border: 2px solid #000;
+  box-shadow: inset 0 0 0 2px #4d4d4d;
+  padding: 18px;
+}
+
+/* Inventory slot. */
+.mc-slot {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: #8b8b8b;
+  box-shadow:
+    inset 2px 2px 0 #373737,
+    inset -2px -2px 0 #fff;
+}
+
+button.mc-slot,
+a.mc-slot {
+  cursor: pointer;
+}
+
+button.mc-slot:hover,
+button.mc-slot:focus-visible {
+  background: #c5c5c5;
+  outline: none;
+}
+
+/* Purple-bordered item tooltip. */
+.mc-tooltip {
+  padding: 6px 10px 7px;
+  background: rgba(16, 0, 16, 0.95);
+  border: 2px solid;
+  border-image: linear-gradient(#5000ff, #28007f) 1;
+  box-shadow: 0 0 0 2px rgba(16, 0, 16, 0.95);
+  font-size: 16px;
+  line-height: 1.35;
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+/* Small tag for tech names. */
+.mc-chip {
+  display: inline-block;
+  padding: 1px 8px 2px;
+  font-size: 15px;
+  color: #fff;
+  text-shadow: 1px 1px 0 #3f3f3f;
+  background: #8b8b8b;
+  box-shadow:
+    inset 2px 2px 0 #373737,
+    inset -2px -2px 0 #fff;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s steps(6),
+    transform 0.5s steps(6);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.hotbar__slot img {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 720px) {
+  .hotbar__slot img,
+  .inv__slot img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .mc-panel {
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

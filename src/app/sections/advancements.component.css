@@ -1,0 +1,158 @@
+.adv {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.adv__toasts {
+  display: grid;
+  gap: 14px;
+}
+
+.toast {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: #212121;
+  border: 3px solid #000;
+  box-shadow:
+    inset 0 0 0 3px #555,
+    6px 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.toast--challenge {
+  box-shadow:
+    inset 0 0 0 3px #8a3fb0,
+    6px 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Slide in from the right, like a toast. */
+.reveal--slide.reveal {
+  transform: translateX(60px);
+}
+
+.reveal--slide.reveal.is-visible {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal--slide.reveal {
+    transform: none;
+  }
+}
+
+.toast__frame {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  background: #3a3a3a;
+  box-shadow:
+    inset 3px 3px 0 #5e5e5e,
+    inset -3px -3px 0 #191919;
+}
+
+.toast--challenge .toast__frame {
+  background: #5a2a75;
+  box-shadow:
+    inset 3px 3px 0 #8a4fb0,
+    inset -3px -3px 0 #2e1240;
+}
+
+.toast__kind {
+  font-size: 16px;
+  color: var(--c-yellow);
+  text-shadow: 2px 2px 0 #3f3f15;
+}
+
+.toast--challenge .toast__kind {
+  color: var(--c-purple);
+  text-shadow: 2px 2px 0 #3f153f;
+}
+
+.toast__place {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+.toast__event {
+  font-size: 17px;
+  color: #e6e6e6;
+}
+
+.toast__meta {
+  margin-top: 2px;
+  font-size: 15px;
+  color: var(--c-gray);
+}
+
+.guild__head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.guild__slot {
+  width: 56px;
+  height: 56px;
+}
+
+.guild__meta {
+  font-size: 15px;
+  color: #5a5a5a;
+}
+
+.guild__name {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #2a2a2a;
+}
+
+.guild__role {
+  color: #00807f;
+}
+
+.guild__desc {
+  margin-top: 16px;
+  font-size: 17px;
+  color: #2f2f2f;
+}
+
+.guild__count {
+  margin-top: 18px;
+  font-size: 15px;
+  color: #007a00;
+}
+
+.guild__crowd {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 30px);
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.guild__crowd li {
+  padding: 3px;
+  background: #8b8b8b;
+  box-shadow:
+    inset 2px 2px 0 #373737,
+    inset -2px -2px 0 #fff;
+}
+
+.guild__crowd img {
+  display: block;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 960px) {
+  .adv {
+    grid-template-columns: 1fr;
+  }
+}

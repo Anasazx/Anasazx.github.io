@@ -1,0 +1,72 @@
+<button type="button" class="coords" (click)="hud.toggleDebug()" title="Toggle debug screen (F3)">
+  <span class="coords__y">Y: {{ y() }}</span> {{ layerName() }}
+</button>
+
+@if (hud.debug()) {
+  <div class="debug">
+    <div class="debug__col">
+      <p>Portfolio 2026 (Angular 19 · hand-written canvas)</p>
+      <p>{{ fps() }} fps</p>
+      <p class="debug__gap"></p>
+      <p>XYZ: 0.500 / {{ y() }}.000 / 0.500</p>
+      <p>Layer: {{ layerName() }}</p>
+      <p>Biome: Médenine, Tunisia</p>
+      <p>Blocks mined: {{ hud.blocksMined() }} · placed: {{ hud.blocksPlaced() }}</p>
+      <p class="debug__gap"></p>
+      <p>Looking for: internships &amp; junior roles</p>
+    </div>
+    <div class="debug__col debug__col--right">
+      <p>Display: {{ viewport() }}</p>
+      <p>Textures: procedural · 0 image files</p>
+      <p>Main stack: Java · Spring · Angular · Python</p>
+      <p class="debug__gap"></p>
+      <p>Press F3 or tap Y to close</p>
+    </div>
+  </div>
+}
+
+<div class="toasts" aria-live="polite">
+  @for (t of hud.toasts(); track t.id) {
+    <div class="toast" [class.toast--challenge]="t.kind === 'challenge'">
+      <span class="toast__icon"><app-sprite [name]="t.icon" [size]="32" /></span>
+      <div>
+        <p class="toast__kind">{{ t.kind === 'challenge' ? 'Challenge Complete!' : 'Advancement Made!' }}</p>
+        <p class="toast__title">{{ t.title }}</p>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="chat" aria-live="polite">
+  @for (line of hud.chat(); track line.id) {
+    <p class="chat__line" [style.color]="line.color ?? null">
+      @if (line.from) {
+        <span class="chat__from">&lt;{{ line.from }}&gt;</span>
+      }
+      {{ line.text }}
+    </p>
+  }
+</div>
+
+@for (l of label() ? [label()!] : []; track l.id) {
+  <p class="hotbar-label">{{ l.text }}</p>
+}
+
+<nav class="hotbar" aria-label="Sections">
+  @for (slot of slots; track slot.label; let i = $index) {
+    <a
+      class="hotbar__slot"
+      [class.hotbar__slot--active]="i === active()"
+      [href]="slot.href"
+      [attr.target]="slot.external ? '_blank' : null"
+      [attr.rel]="slot.external ? 'noopener' : null"
+      [attr.aria-label]="slot.label"
+      [attr.aria-current]="i === active() ? 'true' : null"
+      [attr.title]="slot.label + ' (' + (i + 1) + ')'"
+      (click)="select($event, i)"
+    >
+      <app-sprite [name]="slot.icon" [tint]="slot.tint" [size]="32" />
+      <span class="hotbar__key">{{ i + 1 }}</span>
+    </a>
+  }
+</nav>

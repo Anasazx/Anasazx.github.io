@@ -1,0 +1,75 @@
+<div class="builds__featured">
+  @for (p of featured; track p.title; let i = $index) {
+    <article class="mc-panel build build--featured" appReveal [revealDelay]="i * 100">
+      <ng-container *ngTemplateOutlet="frame; context: { $implicit: p, size: 128 }" />
+      <div class="build__body"><ng-container *ngTemplateOutlet="body; context: { $implicit: p }" /></div>
+    </article>
+  }
+</div>
+
+<div class="builds__grid">
+  @for (p of others; track p.title; let i = $index) {
+    <article class="mc-panel build" appReveal [revealDelay]="i * 100">
+      <ng-container *ngTemplateOutlet="frame; context: { $implicit: p, size: 80 }" />
+      <div class="build__body"><ng-container *ngTemplateOutlet="body; context: { $implicit: p }" /></div>
+    </article>
+  }
+</div>
+
+<ng-template #frame let-p let-size="size">
+  <div class="frame" [class.frame--photo]="p.image">
+    <div class="frame__inner">
+      @if (p.image) {
+        <img class="frame__photo" [src]="p.image" [alt]="p.title + ' screenshot'" loading="lazy" />
+      } @else {
+        <span class="frame__item" [class.frame__item--enchanted]="p.awards?.length" [style.--mask]="mask(p)">
+          <app-sprite [name]="p.icon" [tint]="p.tint" [size]="size" />
+        </span>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #body let-p>
+  <p class="build__meta">
+    {{ p.type }} · {{ p.year }}
+    @if (p.status) {
+      <span class="build__status">· {{ p.status }}</span>
+    }
+  </p>
+  <h3 class="build__title" [class.build__title--enchanted]="p.awards?.length">{{ p.title }}</h3>
+  <p class="build__summary">{{ p.summary }}</p>
+  <ul class="build__points">
+    @for (point of p.highlights; track $index) {
+      <li>{{ point }}</li>
+    }
+  </ul>
+
+  @if (p.awards?.length) {
+    <ul class="build__awards">
+      @for (a of p.awards; track a) {
+        <li><app-sprite name="trophy" [size]="20" /> {{ a }}</li>
+      }
+    </ul>
+  }
+
+  <div class="build__footer">
+    @if (p.tech.length) {
+      <ul class="chips">
+        @for (t of p.tech; track t) {
+          <li class="mc-chip">{{ t }}</li>
+        }
+      </ul>
+    }
+    @if (p.repoUrl || p.liveUrl) {
+      <div class="build__links">
+        @if (p.repoUrl) {
+          <a class="mc-btn mc-btn--sm" [href]="p.repoUrl" target="_blank" rel="noopener">Source</a>
+        }
+        @if (p.liveUrl) {
+          <a class="mc-btn mc-btn--sm" [href]="p.liveUrl" target="_blank" rel="noopener">Live demo</a>
+        }
+      </div>
+    }
+  </div>
+</ng-template>

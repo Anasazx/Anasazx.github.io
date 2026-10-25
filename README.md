@@ -1,59 +1,45 @@
-# AnasazxPersonalPortfolio
+# Anas Riadh Azizi — Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+Personal portfolio built with Angular 19.
 
-## Development server
-
-To start a local development server, run:
+## Develop
 
 ```bash
-ng serve
+npm install
+npm start        # http://localhost:4200
+npm test
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## How it works
 
-## Code scaffolding
+The page is one voxel world you dig down through: each section is a deeper rock layer.
+Every texture, sprite and the title lettering are generated in code (`src/app/pixel/`) — the site ships
+zero image files.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- `src/app/world/world.component.ts` — the interactive surface: terrain, day/night sky, mining and placing blocks.
+  Add `?time=day`, `?time=sunset` or `?time=night` to the URL to force the time of day.
+- `src/app/world/layer.component.ts` — a section rendered as a rock layer, with a jagged edge into the one above.
+- `src/app/data/world.ts` — the layer order, depth (Y level), texture and darkness of each section.
+- `src/app/ui/hud.component.ts` — hotbar navigation (keys 1–9), Y-level readout, F3 debug screen, chat and toasts.
 
-```bash
-ng generate component component-name
-```
+## Editing content
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+All text, projects, skills and links live in [`src/app/data/portfolio.ts`](src/app/data/portfolio.ts).
+Components only render that data, so most updates are a one-file change.
 
-```bash
-ng generate --help
-```
+**Project screenshots:** put the image in `public/projects/` (e.g. `public/projects/awa.jpg`) and set
+`image: 'projects/awa.jpg'` on the project. It replaces the pixel icon inside the item frame.
 
-## Building
+**Project links:** set `repoUrl` and/or `liveUrl` on the project; "Source" / "Live demo" buttons appear automatically.
 
-To build the project run:
+**Icons:** each project, job and skill group picks a sprite by name (`icon`) and an optional `tint` colour.
+Available sprites are listed in `SpriteName` in `src/app/pixel/sprites.ts`.
 
-```bash
-ng build
-```
+## Deploy
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Pushing to `main` (or `master`) runs `.github/workflows/deploy.yml`, which builds the site and publishes it
+to GitHub Pages. One-time setup: in the GitHub repo go to **Settings → Pages** and set **Source** to
+**GitHub Actions**.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The base path is derived from the repo name: a repo named `anasazx.github.io` is served at
+`https://anasazx.github.io/`, any other name at `https://anasazx.github.io/<repo-name>/`.

@@ -1,0 +1,65 @@
+<div class="about">
+  <article class="book" appReveal aria-label="About me">
+    <div class="book__page">
+      <p class="book__pager">Page {{ page() + 1 }} of {{ pages.length }}</p>
+      <p class="book__text" aria-live="polite">{{ pages[page()] }}</p>
+      <div class="book__nav">
+        <button
+          type="button"
+          class="book__arrow book__arrow--back"
+          [disabled]="page() === 0"
+          (click)="turn(-1)"
+          aria-label="Previous page"
+        ></button>
+        <button
+          type="button"
+          class="book__arrow"
+          [disabled]="page() === pages.length - 1"
+          (click)="turn(1)"
+          aria-label="Next page"
+        ></button>
+      </div>
+    </div>
+
+    <div class="book__page book__page--right">
+      <h3 class="book__heading">Education</h3>
+      <p class="book__strong">{{ education.degree }}</p>
+      <p class="book__muted">{{ education.school }} · {{ education.period }}</p>
+      <p class="book__small">{{ education.coursework.join(' · ') }}</p>
+
+      <h3 class="book__heading">Languages</h3>
+      <ul class="book__langs">
+        @for (lang of languages; track lang.name) {
+          <li>
+            <span>{{ lang.name }}</span><span class="book__muted">{{ lang.level }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  </article>
+
+  <aside class="mc-panel stats" appReveal [revealDelay]="120">
+    <h3 class="mc-panel__title">Statistics</h3>
+    <ul class="stats__list">
+      @for (s of stats; track s.label) {
+        <li class="stats__row">
+          <span class="mc-slot stats__slot"><app-sprite [name]="s.icon" [size]="32" /></span>
+          <span class="stats__label">{{ s.label }}</span>
+          <span class="stats__value">{{ s.value }}</span>
+        </li>
+      }
+    </ul>
+
+    <div class="xp" role="img" [attr.aria-label]="'Degree ' + (progress * 100 | number: '1.0-0') + '% complete'">
+      <p class="xp__label">Degree progress · Class of 2027</p>
+      <p class="xp__level">{{ year }}</p>
+      <div class="xp__bar">
+        <div class="xp__fill" [style.width.%]="progress * 100"></div>
+        @for (s of xpSegments; track $index) {
+          <span class="xp__tick"></span>
+        }
+      </div>
+      <p class="xp__caption">Year {{ year }} of 3 · {{ progress * 100 | number: '1.0-0' }}%</p>
+    </div>
+  </aside>
+</div>

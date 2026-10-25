@@ -1,0 +1,36 @@
+<section id="surface" class="world">
+  <canvas #scene class="world__scene" aria-hidden="true"></canvas>
+
+  <div class="world__ui">
+    <div class="world__logo">
+      <h1>
+        <span class="sr-only">{{ profile.name }}, {{ profile.role }}</span>
+        <canvas #title aria-hidden="true"></canvas>
+      </h1>
+      <button type="button" class="world__splash" (click)="nextSplash()" aria-label="Show another splash message">
+        {{ splash() }}
+      </button>
+    </div>
+
+    <p class="world__role sh">{{ profile.role }}</p>
+    <p class="world__tagline sh">{{ profile.tagline }}</p>
+
+    <nav class="world__menu" aria-label="Main menu">
+      <button type="button" class="mc-btn mc-btn--wide" (click)="go('about')">Explore My World</button>
+      <button type="button" class="mc-btn mc-btn--wide" (click)="go('contact')">Multiplayer — Contact Me</button>
+      <div class="world__menu-row">
+        <a class="mc-btn" [href]="profile.github" target="_blank" rel="noopener">GitHub</a>
+        <a class="mc-btn" [href]="profile.linkedin" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </nav>
+  </div>
+
+  <p class="world__corner world__corner--left sh">Portfolio Edition 2026</p>
+  <p class="world__corner world__corner--right sh">
+    @if (touch) {
+      Hold a block to mine it
+    } @else {
+      Hold click to mine · Right-click to place · Click the sun
+    }
+  </p>
+</section>

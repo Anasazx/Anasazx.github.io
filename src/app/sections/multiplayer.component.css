@@ -1,0 +1,107 @@
+.mp {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.mp__title {
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.mp__list {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.55);
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+.server {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 8px;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.server:hover,
+.server:focus-visible {
+  border-color: #c0c0c0;
+  background: rgba(255, 255, 255, 0.04);
+  outline: none;
+}
+
+.server__icon {
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.server__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.server__name {
+  font-size: 19px;
+  color: #fff;
+}
+
+.server__motd {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.server__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.server__ping {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 14px;
+}
+
+.server__ping i {
+  width: 3px;
+  background: #55ff55;
+  box-shadow: 1px 1px 0 #153f15;
+}
+
+.server__ping i:nth-child(1) { height: 3px; }
+.server__ping i:nth-child(2) { height: 5px; }
+.server__ping i:nth-child(3) { height: 8px; }
+.server__ping i:nth-child(4) { height: 11px; }
+.server__ping i:nth-child(5) { height: 14px; }
+
+.mp__buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.mp__hint {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 15px;
+  color: #c8c8c8;
+}
+
+@media (max-width: 720px) {
+  .mp__buttons {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .server__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .server__status {
+    display: none;
+  }
+}

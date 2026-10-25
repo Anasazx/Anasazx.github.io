@@ -1,0 +1,39 @@
+<div class="quests">
+  <div class="quests__rail" #rail aria-hidden="true">
+    <span class="quests__cart" [style.top]="'calc(' + cart() * 100 + '% - ' + cart() * 40 + 'px)'">
+      <app-sprite name="minecart" [size]="40" />
+    </span>
+  </div>
+
+  <ol class="quests__list">
+    @for (job of experience; track job.period; let i = $index) {
+      <li class="mc-panel quest" appReveal [revealDelay]="i * 100">
+        <div class="quest__head">
+          <span class="mc-slot quest__slot"><app-sprite [name]="job.icon" [tint]="job.tint" [size]="32" /></span>
+          <div class="quest__titles">
+            <h3 class="quest__role">{{ job.role }}</h3>
+            <p class="quest__company">{{ job.company }}</p>
+          </div>
+          <div class="quest__when">
+            <p class="quest__done">✔ Quest complete</p>
+            <p>{{ job.period }}</p>
+            <p class="quest__loc">{{ job.location }}</p>
+          </div>
+        </div>
+
+        <ul class="quest__points">
+          @for (point of job.highlights; track $index) {
+            <li>{{ point }}</li>
+          }
+        </ul>
+
+        <p class="quest__reward">Rewards</p>
+        <ul class="chips">
+          @for (t of job.tech; track t) {
+            <li class="mc-chip">{{ t }}</li>
+          }
+        </ul>
+      </li>
+    }
+  </ol>
+</div>

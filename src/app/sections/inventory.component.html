@@ -1,0 +1,61 @@
+<div class="mc-panel inv" appReveal>
+  <div class="inv__top">
+    <h3 class="mc-panel__title">Inventory <span class="inv__count">({{ total }} items)</span></h3>
+    <button type="button" class="mc-btn mc-btn--sm" (click)="list.set(!list())" [attr.aria-pressed]="list()">
+      {{ list() ? 'Inventory view' : 'List view' }}
+    </button>
+  </div>
+
+  @if (!list()) {
+    <div class="inv__rows">
+      @for (g of groups; track g.name) {
+        <div class="inv__row">
+          <p class="inv__label">{{ g.name }}</p>
+          <ul class="inv__slots">
+            @for (s of g.items; track s.name) {
+              <li>
+                <button
+                  type="button"
+                  class="mc-slot inv__slot"
+                  [attr.aria-label]="s.name + ', ' + g.name"
+                  (mouseenter)="show($event, s, g)"
+                  (mousemove)="show($event, s, g)"
+                  (mouseleave)="hide()"
+                  (focus)="show($event, s, g)"
+                  (blur)="hide()"
+                >
+                  <app-sprite [name]="g.icon" [tint]="s.color" [size]="32" />
+                </button>
+              </li>
+            }
+            @for (e of g.empty; track $index) {
+              <li><span class="mc-slot inv__slot"></span></li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+    <p class="inv__hint">Hover or tap an item to inspect it.</p>
+  } @else {
+    <dl class="inv__list">
+      @for (g of groups; track g.name) {
+        <div class="inv__list-row">
+          <dt>{{ g.name }}</dt>
+          <dd>
+            @for (s of g.items; track s.name; let last = $last) {
+              {{ s.name }}{{ last ? '' : ' · ' }}
+            }
+          </dd>
+        </div>
+      }
+    </dl>
+  }
+</div>
+
+@if (hover(); as h) {
+  <div class="mc-tooltip inv__tip" [style.left.px]="h.x" [style.top.px]="h.y" role="tooltip">
+    <p class="inv__tip-name">{{ h.skill.name }}</p>
+    <p class="c-gray">{{ h.group.name }}</p>
+    <p class="inv__tip-id">{{ id(h.skill) }}</p>
+  </div>
+}

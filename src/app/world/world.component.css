@@ -1,0 +1,159 @@
+:host {
+  display: block;
+}
+
+.world {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  max-height: 1100px;
+  overflow: hidden;
+  background: #6b9cf0;
+}
+
+.world__scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* The UI layer lets pointer events through to the world except on controls. */
+.world__ui {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: max(64px, 9vh) 20px 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.world__ui a,
+.world__ui button {
+  pointer-events: auto;
+}
+
+.world__logo {
+  position: relative;
+}
+
+.world__logo h1 {
+  margin: 0;
+  line-height: 0;
+}
+
+.world__logo canvas {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.25));
+}
+
+.world__splash {
+  position: absolute;
+  right: -28px;
+  bottom: -6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 20px;
+  color: #ffff55;
+  text-shadow: 2px 2px 0 #3f3f15;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: rotate(-16deg);
+  transform-origin: center;
+  animation: splash 0.55s ease-in-out infinite alternate;
+}
+
+@keyframes splash {
+  to {
+    transform: rotate(-16deg) scale(1.1);
+  }
+}
+
+.world__role {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #fff;
+}
+
+.world__tagline {
+  margin-top: 4px;
+  font-size: 18px;
+  color: #e6e6e6;
+}
+
+.world__menu {
+  display: grid;
+  gap: 10px;
+  width: min(400px, 100%);
+  margin-top: 34px;
+}
+
+.world__menu-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.world__corner {
+  position: absolute;
+  z-index: 1;
+  bottom: 10px;
+  margin: 0;
+  font-size: 15px;
+  color: #fff;
+  pointer-events: none;
+}
+
+.world__corner--left {
+  left: 14px;
+}
+
+.world__corner--right {
+  right: 14px;
+}
+
+@media (max-width: 1000px) {
+  .world__corner {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .world__splash {
+    right: -8px;
+    bottom: -14px;
+    font-size: 16px;
+  }
+
+  .world__ui {
+    padding-top: 52px;
+  }
+
+  .world__role {
+    margin-top: 22px;
+    font-size: 20px;
+  }
+
+  .world__tagline {
+    font-size: 14px;
+  }
+
+  .world__menu {
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .world__menu-row {
+    gap: 8px;
+  }
+}

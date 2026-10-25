@@ -1,0 +1,110 @@
+.inv {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.inv__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.inv__top .mc-panel__title {
+  margin: 0;
+}
+
+.inv__count {
+  color: #6a6a6a;
+}
+
+.inv__rows {
+  display: grid;
+  gap: 10px;
+}
+
+.inv__row {
+  display: grid;
+  grid-template-columns: 120px auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.inv__label {
+  font-size: 16px;
+  text-align: right;
+}
+
+.inv__slots {
+  display: flex;
+}
+
+.inv__slot {
+  width: 48px;
+  height: 48px;
+}
+
+.inv__hint {
+  margin-top: 14px;
+  font-size: 15px;
+  color: #6a6a6a;
+}
+
+.inv__list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.inv__list-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+}
+
+.inv__list dt {
+  color: #2a2a2a;
+  font-weight: 600;
+}
+
+.inv__list dd {
+  margin: 0;
+}
+
+.inv__tip {
+  position: fixed;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.inv__tip p {
+  margin: 0;
+}
+
+.inv__tip-name {
+  color: #fff;
+}
+
+.inv__tip-id {
+  color: #555;
+  text-shadow: none;
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .inv__row,
+  .inv__list-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .inv__label {
+    text-align: left;
+  }
+
+  .inv__slot {
+    width: 34px;
+    height: 34px;
+  }
+}

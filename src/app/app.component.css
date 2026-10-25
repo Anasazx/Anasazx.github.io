@@ -1,0 +1,22 @@
+.bedrock {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 20px 0 120px;
+  text-align: center;
+}
+
+.bedrock__title {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.bedrock .mc-btn {
+  margin-top: 14px;
+}
+
+.bedrock__copy {
+  margin-top: 26px;
+  font-size: 15px;
+  color: #c8c8c8;
+}

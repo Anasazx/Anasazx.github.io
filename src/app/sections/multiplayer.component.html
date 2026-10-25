@@ -1,0 +1,31 @@
+<div class="mp" appReveal>
+  <p class="mp__title sh">Play Multiplayer</p>
+
+  <div class="mp__list">
+    <a class="server" [href]="'mailto:' + profile.email" (click)="joined()">
+      <img class="server__icon" [src]="icon" alt="" width="64" height="64" />
+      <div class="server__info">
+        <p class="server__name">{{ profile.name }}</p>
+        <p class="server__motd">
+          <span class="c-green">{{ profile.availability }}</span>
+          <span class="c-gray"> · graduating 2027</span>
+        </p>
+        <p class="server__motd c-aqua">{{ profile.email }}</p>
+      </div>
+      <div class="server__status">
+        <span class="server__players c-gray">1/1</span>
+        <span class="server__ping" aria-label="Online">
+          <i></i><i></i><i></i><i></i><i></i>
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <div class="mp__buttons">
+    <a class="mc-btn" [href]="'mailto:' + profile.email" (click)="joined()">Join Server</a>
+    <button type="button" class="mc-btn" (click)="copy()">Copy Address</button>
+    <a class="mc-btn" [href]="profile.linkedin" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="mc-btn" [href]="profile.github" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <p class="mp__hint sh">“Join Server” opens your email client. Based in {{ profile.location }}.</p>
+</div>

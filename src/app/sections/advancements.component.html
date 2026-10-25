@@ -1,0 +1,35 @@
+<div class="adv">
+  <ul class="adv__toasts">
+    @for (a of awards; track a.event; let i = $index) {
+      <li class="toast reveal--slide" [class.toast--challenge]="a.tier === 'challenge'" appReveal [revealDelay]="i * 180">
+        <span class="toast__frame">
+          <app-sprite name="trophy" [tint]="a.tier === 'challenge' ? '#ffd23f' : '#d0d0d0'" [size]="40" />
+        </span>
+        <div class="toast__text">
+          <p class="toast__kind">{{ a.tier === 'challenge' ? 'Challenge Complete!' : 'Advancement Made!' }}</p>
+          <p class="toast__place">{{ a.place }}</p>
+          <p class="toast__event">{{ a.event }}</p>
+          <p class="toast__meta">{{ a.project }} · {{ a.year }}</p>
+        </div>
+      </li>
+    }
+  </ul>
+
+  <article class="mc-panel guild" appReveal [revealDelay]="200">
+    <div class="guild__head">
+      <span class="mc-slot guild__slot"><app-sprite name="robot" [size]="40" /></span>
+      <div>
+        <p class="guild__meta">Guild · {{ leadership.period }}</p>
+        <h3 class="guild__name">{{ leadership.org }}</h3>
+        <p class="guild__role">{{ leadership.role }}</p>
+      </div>
+    </div>
+    <p class="guild__desc">{{ leadership.description }}</p>
+    <p class="guild__count">Members online: {{ leadership.members }}+</p>
+    <ul class="guild__crowd" aria-hidden="true">
+      @for (face of members; track $index) {
+        <li><img [src]="face" alt="" width="24" height="24" /></li>
+      }
+    </ul>
+  </article>
+</div>
